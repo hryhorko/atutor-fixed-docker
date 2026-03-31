@@ -45,6 +45,13 @@ services:
    ```bash
    docker exec -u root <container_id> rm -rf /var/www/html/install
    ```
+### ⚠️ Important: Directory Permissions
+Before running the containers, ensure the content directory on your host machine is writable by the webserver (user ID 33 in Debian):
+```bash
+mkdir -p ./atutor_content
+sudo chown -R 33:33 ./atutor_content
+sudo chmod -R 775 ./atutor_content
+```
 
 ## 🛠 Post-Installation Tweaks
 
