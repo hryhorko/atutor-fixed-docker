@@ -28,7 +28,8 @@ RUN sed -i "s/\$errors\[\] = 'Database <b>'.\$db_name.'<\/b> is not in UTF8/\/\/
 RUN touch /var/www/html/include/config.inc.php \
     && chown -R www-data:www-data /var/www/html/ \
     && chmod -R 775 /var/www/html/ \
-    && chmod 664 /var/www/html/include/config.inc.php
+    && chmod 777 /var/www/html/include \
+    && chmod 666 /var/www/html/include/config.inc.php
 
 # --- FIX 3: Reliable Debug Toggle in footer ---
 RUN sed -i "s/if (defined('AT_DEVEL') && AT_DEVEL) {/if (defined('AT_DEBUG') \&\& AT_DEBUG) {/g" /var/www/html/include/footer.inc.php
