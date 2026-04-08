@@ -43,6 +43,8 @@ services:
       - db
     volumes:
       - ./atutor_content:/var/www/html/content
+      # Uncomment the line below for plugin development:
+      # - ./my_plugin:/var/www/html/mods/my_plugin
 ```
 
 ### Installation Steps
