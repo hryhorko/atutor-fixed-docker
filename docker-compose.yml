@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Database for ATutor
+  db:
+    image: mysql:5.7
+    container_name: atutor_db
+    command: --character-set-server=utf8 --collation-server=utf8_general_ci --sql-mode="NO_ENGINE_SUBSTITUTION"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_password}
+      MYSQL_DATABASE: atutor
+      MYSQL_USER: ${DB_USER:-atutor_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-user_password}
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  # ATutor LMS
+  atutor:
+    image: hryhorko/atutor-fixed:2.2.4
+    container_name: atutor_lms
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    volumes:
+      - ./atutor_content:/var/www/html/content
+      # Uncomment the line below for plugin development:
+      # - ./my_plugin:/var/www/html/mods/my_plugin
